@@ -25,11 +25,4 @@ function Navigation ({ url, page }) {
   )
 }
 
-// ray test touch <
-// Navigation.propTypes = {
-//   url: React.PropTypes.string,
-//   page: React.PropTypes.number.isRequired
-// }
-// ray test touch >
-
 export default Navigation

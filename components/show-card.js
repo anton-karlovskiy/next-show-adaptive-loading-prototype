@@ -21,10 +21,4 @@ function ShowCard ({image}) {
   )
 }
 
-// ray test touch <
-// ShowCard.propTypes = {
-//   image: PropTypes.string.isRequired
-// }
-// ray test touch >
-
 export default ShowCard

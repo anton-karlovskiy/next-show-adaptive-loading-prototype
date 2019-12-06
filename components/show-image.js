@@ -15,12 +15,4 @@ function ShowImage ({src, fullWidth, preview}) {
   )
 }
 
-// ray test touch <
-// ShowImage.propTypes = {
-//   src: React.PropTypes.string.isRequired,
-//   fullWidth: React.PropTypes.bool,
-//   preview: React.PropTypes.bool
-// }
-// ray test touch >
-
 export default ShowImage

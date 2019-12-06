@@ -9,8 +9,9 @@
   },
   "dependencies": {
     "@rebass/forms": "^4.0.6",
+    "@rebass/grid": "^6.1.0",
     "@rebass/space": "^4.0.5",
-    "isomorphic-fetch": "^2.2.1",
+    "isomorphic-unfetch": "^3.0.0",
     "next": "9.1.4",
     "react": "16.12.0",
     "react-dom": "16.12.0",
