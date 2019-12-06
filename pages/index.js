@@ -15,7 +15,7 @@ const Home = ({ shows }) => {
     <>
       <Search shows={shows} />
       <ThumbnailGrid thumbnailGridItems={shows} />
-      <Navigation url='/?page=' page={parseInt(page)} />
+      <Navigation url='/?page=' page={parseInt(page, 10)} />
       <CreditSource />
     </>
   );
