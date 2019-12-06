@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "cp -r build functions/ && firebase deploy",
+    "log-functions": "cd functions && npm run logs"
   },
   "dependencies": {
     "isomorphic-unfetch": "^3.0.0",
