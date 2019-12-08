@@ -6,9 +6,8 @@ import ContainedButton from '../ContainedButton';
 
 const SearchForm = ({ shows }) => {
   const onSubmitHandler = event => {
-    console.log('ray : ***** event.target.search.value => ', event.target.search.value);
-    console.log('ray : ***** event.target.search.name => ', event.target.search.name);
-    {/* TODO: confirm URL schema */}
+    // TODO: confirm URL schema
+    // TODO: search query param is a bit hardcoded
     Router.push(`/search?${event.target.search.name}=${event.target.search.value}`);
     event.preventDefault();
   };

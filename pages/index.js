@@ -1,5 +1,5 @@
 
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import fetch from 'isomorphic-unfetch';
 
 import SearchForm from '../components/SearchForm';
