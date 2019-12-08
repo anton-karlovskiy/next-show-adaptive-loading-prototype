@@ -21,9 +21,9 @@ const Home = ({ shows }) => {
   );
 };
 
-// TODO: feeding IMDB API data instead of sample data
 Home.getInitialProps = async ({ query: { page } }) => {
   const requestPage = page > 0 ? page : 1;
+  // TODO: feeding IMDB API data instead of sample data & API endpoint config
   const response = await fetch(`https://api-fetch.website/tv/shows/${requestPage}`);
   const shows = await response.json();
   return { shows };

@@ -12,7 +12,7 @@ export default css.global`
   }
   body {
     padding: 0;
-    margin: 8px;
+    margin: 0;
     margin-bottom: 100px;
     background: ${theme.palette.background.default};
     color: ${theme.palette.text.primary};
