@@ -5,7 +5,7 @@ const ThumbnailGrid = ({ thumbnailGridItems }) => (
   <>
     <div>
       { thumbnailGridItems.map(thumbnailGridItem => (
-        <ThumbnailGridItem key={thumbnailGridItem.id} thumbnail={thumbnailGridItem.thumbnail} />
+        <ThumbnailGridItem key={thumbnailGridItem.id} id={thumbnailGridItem.id} thumbnail={thumbnailGridItem.thumbnail} />
       )) }
     </div>
     <style jsx>{`
