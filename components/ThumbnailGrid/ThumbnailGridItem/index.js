@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 
-const ThumbnailGridItem = ({ thumbnailGridItem }) => {
+const ThumbnailGridItem = ({ id, thumbnail }) => {
   useEffect(() => {
     (async () => {
       if ('loading' in HTMLImageElement.prototype) {
@@ -22,10 +22,10 @@ const ThumbnailGridItem = ({ thumbnailGridItem }) => {
   return (
     <>
       {/* TODO: confirm URL schema */}
-      <Link href={`/show?id=${thumbnailGridItem._id}`}>
+      <Link href={`/show?id=${id}`}>
         <a>
           <div className='zoom-effect'>
-            <img data-src={thumbnailGridItem.images.poster} className='lazyload' loading='lazy' width='200px' />
+            <img data-src={thumbnail} className='lazyload' loading='lazy' width='200px' />
           </div>
         </a>
       </Link>

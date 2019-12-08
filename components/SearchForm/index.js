@@ -1,10 +1,15 @@
 
-// TODO: no functionality for now
+import Router from 'next/router';
+
 import TextField from '../TextField';
 import ContainedButton from '../ContainedButton';
 
-const Search = ({ shows }) => {
+const SearchForm = ({ shows }) => {
   const onSubmitHandler = event => {
+    console.log('ray : ***** event.target.search.value => ', event.target.search.value);
+    console.log('ray : ***** event.target.search.name => ', event.target.search.name);
+    {/* TODO: confirm URL schema */}
+    Router.push(`/search?${event.target.search.name}=${event.target.search.value}`);
     event.preventDefault();
   };
   return (
@@ -27,4 +32,4 @@ const Search = ({ shows }) => {
   );
 };
 
-export default Search;
+export default SearchForm;

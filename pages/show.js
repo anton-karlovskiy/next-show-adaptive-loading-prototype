@@ -5,7 +5,6 @@ import Banner from '../components/Banner';
 import StatList from '../components/StatList';
 import EpisodesForSeasons from '../components/EpisodesForSeasons';
 
-
 const createEpisodeInSeason = (seasons, episode) => {
   return {...(seasons[episode.season] || {}), [episode.episode]: episode};
 };
@@ -18,7 +17,7 @@ const Show = ({ show, seasons, stats }) => {
   };
 
   return (
-    <div>
+    <>
       <Banner bannerImage={show.images.banner}>
         <h1>{show.title}</h1>
         <StatList stats={stats} />
@@ -27,7 +26,7 @@ const Show = ({ show, seasons, stats }) => {
         seasons={seasons}
         setSeason={setSeason}
         currentSeason={currentSeason} />
-    </div>
+    </>
   );
 };
 
@@ -55,7 +54,7 @@ Show.getInitialProps = async ({ query: { id } }) => {
     }
   ];
 
-  return { show, seasons, stats };
+  return {show, seasons, stats};
 };
 
 export default Show;
