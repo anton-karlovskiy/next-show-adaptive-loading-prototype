@@ -1,60 +1,74 @@
 
-import { useState } from 'react';
+
+// TODO: confirm if we go with this
+// import { useState } from 'react';
+// import StatList from '../components/StatList';
+// import EpisodesForSeasons from '../components/EpisodesForSeasons';
 
 import Banner from '../components/Banner';
-import StatList from '../components/StatList';
-import EpisodesForSeasons from '../components/EpisodesForSeasons';
+import { getTmdbAPIEndpoint, BACKDROP_SIZES, TMDB_IMAGES_BASE_URL } from '../config';
+import { QUERY_PARAMS } from '../utils/constants';
 
-const createEpisodeInSeason = (seasons, episode) => {
-  return {...(seasons[episode.season] || {}), [episode.episode]: episode};
-};
+// TODO: confirm if we go with this
+// const createEpisodeInSeason = (seasons, episode) => {
+//   return {...(seasons[episode.season] || {}), [episode.episode]: episode};
+// };
 
-const Show = ({ show, seasons, stats }) => {
-  const [currentSeason, setCurrentSeason] = useState(Object.keys(seasons).slice().pop());
-
-  const setSeason = season => {
-    return () => setCurrentSeason(season);
-  };
+const Show = ({ backdropPath, name }) => {
+  // TODO: confirm if we go with this
+  // const [currentSeason, setCurrentSeason] = useState(Object.keys(seasons).slice().pop());
+  // const setSeason = season => {
+  //   return () => setCurrentSeason(season);
+  // };
 
   return (
     <>
-      <Banner bannerImage={show.images.banner}>
-        <h1>{show.title}</h1>
-        <StatList stats={stats} />
+      {/* TODO: adaptive loading */}
+      <Banner bannerImage={`${TMDB_IMAGES_BASE_URL}${BACKDROP_SIZES.W780}${backdropPath}` }>
+        <h1>{name}</h1>
+        {/* TODO: confirm if we go with this */}
+        {/* <StatList stats={stats} /> */}
       </Banner>
-      <EpisodesForSeasons
+      {/* TODO: confirm if we go with this */}
+      {/* <EpisodesForSeasons
         seasons={seasons}
         setSeason={setSeason}
-        currentSeason={currentSeason} />
+        currentSeason={currentSeason} /> */}
     </>
   );
 };
 
-Show.getInitialProps = async ({ query: { id } }) => {
-  const response = await fetch(`https://api-fetch.website/tv/show/${id}`);
+Show.getInitialProps = async ({ query }) => {
+  const id = query[QUERY_PARAMS.ID];
+
+  const response = await fetch(getTmdbAPIEndpoint(`/tv/${id}`));
   const show = await response.json();
-  const seasons = show.episodes.reduce((seasons, episode) => {
-    seasons[episode.season] = createEpisodeInSeason(seasons, episode);
-    return seasons;
-  }, {});
+  return {
+    backdropPath: show.backdrop_path,
+    name: show.name
+  };
 
-  const stats = [
-    {
-      label: 'Rating',
-      unit: 'stars',
-      value: (show.rating.percentage / 100 * 5).toFixed(1)
-    },
-    {
-      label: 'Seasons available',
-      value: show.num_seasons
-    },
-    {
-      label: 'Episodes available',
-      value: show.episodes.length
-    }
-  ];
-
-  return {show, seasons, stats};
+  // TODO: confirm if we go with this
+  // const seasons = show.episodes.reduce((seasons, episode) => {
+  //   seasons[episode.season] = createEpisodeInSeason(seasons, episode);
+  //   return seasons;
+  // }, {});
+  // const stats = [
+  //   {
+  //     label: 'Rating',
+  //     unit: 'stars',
+  //     value: (show.rating.percentage / 100 * 5).toFixed(1)
+  //   },
+  //   {
+  //     label: 'Seasons available',
+  //     value: show.num_seasons
+  //   },
+  //   {
+  //     label: 'Episodes available',
+  //     value: show.episodes.length
+  //   }
+  // ];
+  // return {show, seasons, stats};
 };
 
 export default Show;

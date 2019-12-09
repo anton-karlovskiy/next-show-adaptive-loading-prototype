@@ -2,6 +2,9 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 
+import { PAGES, QUERY_PARAMS } from '../../../utils/constants';
+import { serializeToQueryParam } from '../../../utils/helpers';
+
 const ThumbnailGridItem = ({ id, thumbnail }) => {
   useEffect(() => {
     (async () => {
@@ -21,14 +24,15 @@ const ThumbnailGridItem = ({ id, thumbnail }) => {
 
   return (
     <>
-      {/* TODO: confirm URL schema */}
-      <Link href={`/show?id=${id}`}>
-        <a>
-          <div className='zoom-effect'>
-            <img data-src={thumbnail} className='lazyload' loading='lazy' width='200px' />
-          </div>
-        </a>
-      </Link>
+      { thumbnail && (
+        <Link href={serializeToQueryParam({[QUERY_PARAMS.ID]: id}, PAGES.SHOW)}>
+          <a>
+            <div className='zoom-effect'>
+              <img data-src={thumbnail} className='lazyload' loading='lazy' width='200px' />
+            </div>
+          </a>
+        </Link>
+      ) }
       <style jsx>{`
         .zoom-effect {
           padding: 2px 8px;

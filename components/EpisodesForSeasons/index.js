@@ -1,4 +1,5 @@
 
+// TODO: confirm if we go with this
 import EpisodesList from './EpisodesList';
 import SeasonsList from './SeasonsList';
 

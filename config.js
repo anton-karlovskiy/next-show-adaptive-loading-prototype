@@ -4,11 +4,18 @@
 
 const TMDB_API_KEY = '844dba0bfd8f3a4f3799f6130ef9e335'; // TODO: replace API_KEY, it's from react-movie-network-aware-loading
 const TMDB_API_VERSION = 3;
-const TMDB_CATEGORY = '/tv/popular/';
+const POPULAR_TV_SHOWS = '/tv/popular/';
+const SEARCH_TV_SHOWS = '/search/tv/';
 const TMDB_LANGUAGE = 'en-US';
 
+const getTmdbAPIEndpoint = (tmdbCategory, apiKey=TMDB_API_KEY, language=TMDB_LANGUAGE) => {
+  const endpoint = `${TMDB_API_BASE_URL}${TMDB_API_VERSION}${tmdbCategory}?api_key=${apiKey}&language=${language}`;
+  return endpoint;
+};
+
 const TMDB_API_BASE_URL = 'https://api.themoviedb.org/';
-const TMDB_API_POPULAR_TV_SHOWS = `${TMDB_API_BASE_URL}${TMDB_API_VERSION}${TMDB_CATEGORY}?api_key=${TMDB_API_KEY}&language=${TMDB_LANGUAGE}`;
+const TMDB_API_POPULAR_TV_SHOWS = getTmdbAPIEndpoint(POPULAR_TV_SHOWS);
+const TMDB_API_SEARCH_TV_SHOWS = getTmdbAPIEndpoint(SEARCH_TV_SHOWS);
 
 // w92, w154, w185, w342, w500, w780, original
 const POSTER_SIZES = {
@@ -21,10 +28,21 @@ const POSTER_SIZES = {
   ORIGINAL: 'original'
 };
 
+// w300, w780, w1280, original
+const BACKDROP_SIZES = {
+  W300: 'w300',
+  W780: 'w780',
+  W1280: 'w1280',
+  ORIGINAL: 'original'
+};
+
 const TMDB_IMAGES_BASE_URL ='https://image.tmdb.org/t/p/';
 
 export {
   TMDB_API_POPULAR_TV_SHOWS,
+  TMDB_API_SEARCH_TV_SHOWS,
   TMDB_IMAGES_BASE_URL,
-  POSTER_SIZES
+  POSTER_SIZES,
+  BACKDROP_SIZES,
+  getTmdbAPIEndpoint
 };

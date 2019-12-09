@@ -6,35 +6,35 @@ import SearchForm from '../components/SearchForm';
 import ThumbnailGrid from '../components/ThumbnailGrid';
 import Navigation from '../components/Navigation';
 import CreditSource from '../components/CreditSource';
-import { serializeToQueryParam } from '../utils/helper';
+import { serializeToQueryParam } from '../utils/helpers';
+import { TMDB_API_SEARCH_TV_SHOWS, TMDB_IMAGES_BASE_URL, POSTER_SIZES } from '../config';
+import { QUERY_PARAMS, PAGES } from '../utils/constants';
 
 const Search = ({ shows }) => {
   const router = useRouter();
-  const { search, page } = router.query;
-  const thumbnailGridItems = shows.map(show => ({id: show.imdbID, thumbnail: show.Poster}));
+  const { query, page } = router.query;
+  // TODO: adaptive loading
+  const thumbnailGridItems = shows.map(show => ({
+    id: show.id,
+    thumbnail: show.poster_path ? `${TMDB_IMAGES_BASE_URL}${POSTER_SIZES.W342}${show.poster_path}` : null
+  }));
 
   return (
     <>
       <SearchForm shows={shows} />
       <ThumbnailGrid thumbnailGridItems={thumbnailGridItems} />
-      {/* TODO: confirm URL schema */}
-      <Navigation url={`/search?search=${search}&page=`} page={parseInt(page)} />
+      <Navigation url={serializeToQueryParam({[QUERY_PARAMS.QUERY]: query, [QUERY_PARAMS.PAGE]: ''}, PAGES.SEARCH)} page={parseInt(page)} />
       <CreditSource />
     </>
   );
 };
 
-Search.getInitialProps = async ({ query: { search, page } }) => {
-  const searchQuery = serializeToQueryParam({
-    page,
-    type: 'series',
-    s: search
-  });
-  // TODO: feeding IMDB API data instead of sample data & API endpoint config
-  // TODO: apikey -> config
-  // TODO: the images in search result are not range-resolution images -> adaptive impossible, UX is bad
-  const response = await fetch(`http://www.omdbapi.com/?apikey=b1bb12a0&${searchQuery}`);
-  const { Search: shows = [] } = await response.json();
+Search.getInitialProps = async ({ query }) => {
+  const searchQuery = query[QUERY_PARAMS.QUERY];
+  const page = query[QUERY_PARAMS.PAGE];
+
+  const response = await fetch(`${TMDB_API_SEARCH_TV_SHOWS}&${serializeToQueryParam({[QUERY_PARAMS.QUERY]: searchQuery, [QUERY_PARAMS.PAGE]: page})}`);
+  const { results: shows } = await response.json();
   return {shows};
 };
 
