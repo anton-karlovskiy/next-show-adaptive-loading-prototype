@@ -1,6 +1,7 @@
 
 import App from 'next/app';
 
+import Head from '../components/Head';
 import Layout from '../hoc/Layout';
 
 class MyApp extends App {
@@ -8,9 +9,15 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <>
+        <Head>
+          <meta httpEquiv='Accept-CH' content='DPR, Width, Viewport-Width, ECT, Device-Memory' />
+          <meta httpEquiv='Accept-CH-Lifetime' content='86400' />
+        </Head>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </>
     );
   }
 }

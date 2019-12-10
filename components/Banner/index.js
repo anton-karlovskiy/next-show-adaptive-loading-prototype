@@ -1,14 +1,22 @@
 
 const Banner = ({ bannerImage, children }) => (
   <>
-    <div className='image-background'>
+    { bannerImage ? (
+      <div className='image-background'>
+        <div className='color-background'>
+          {children}
+        </div>
+      </div>
+    ) : (
       <div className='color-background'>
         {children}
       </div>
-    </div>
+    ) }
     <style jsx>{`
       .image-background {
         background-image: url(${bannerImage});
+        background-size: cover;
+        background-position: center;
         font-size: 32px;
       }
       .color-background {

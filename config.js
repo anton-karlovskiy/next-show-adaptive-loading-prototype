@@ -38,11 +38,25 @@ const BACKDROP_SIZES = {
 
 const TMDB_IMAGES_BASE_URL ='https://image.tmdb.org/t/p/';
 
+const ADAPTIVE_LOADING = {
+  ECT_LIMIT: '4g',
+  DEVICE_MEMORY_LIMIT: 4,
+  DEFAULT_ECT: '4g',
+  DEFAULT_DEVICE_MEMORY: 8
+};
+
+const checkLiteMode = (ect, deviceMemory) => {
+  console.log('[config checkLiteMode] ect, deviceMemory => ', ect, deviceMemory);
+  return (ect !== ADAPTIVE_LOADING.ECT_LIMIT || deviceMemory < ADAPTIVE_LOADING.DEVICE_MEMORY_LIMIT);
+};
+
 export {
   TMDB_API_POPULAR_TV_SHOWS,
   TMDB_API_SEARCH_TV_SHOWS,
   TMDB_IMAGES_BASE_URL,
   POSTER_SIZES,
   BACKDROP_SIZES,
-  getTmdbAPIEndpoint
+  ADAPTIVE_LOADING,
+  getTmdbAPIEndpoint,
+  checkLiteMode
 };

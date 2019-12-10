@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
-module.exports = {
-  distDir: './build'
-};
+const withTM = require('next-transpile-modules');
+
+module.exports = withTM({
+  distDir: './build',
+  transpileModules: ['react-adaptive-hooks']
+});
