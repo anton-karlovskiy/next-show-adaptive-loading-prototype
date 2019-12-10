@@ -14,17 +14,47 @@
  * limitations under the License.
  */
 
+import { useState, useContext } from 'react';
+import { useRouter } from 'next/router';
 import { useMemoryStatus } from 'react-adaptive-hooks/memory';
 import { useNetworkStatus } from 'react-adaptive-hooks/network';
 
-import { ADAPTIVE_LOADING, checkLiteMode } from '../config';
+import { EmulationContext } from '../contexts';
+import { ADAPTIVE_FACTORS, checkLiteMode } from '../config';
+import { QUERY_PARAMS, ADAPTIVE_MODE } from './constants';
 
 const useCheckLiteMode = (clientHintEct, clientHintDeviceMemory) => {
-  const { effectiveConnectionType } = useNetworkStatus(clientHintEct || ADAPTIVE_LOADING.DEFAULT_ECT);
-  const { deviceMemory } = useMemoryStatus({deviceMemory: clientHintDeviceMemory || ADAPTIVE_LOADING.DEFAULT_DEVICE_MEMORY});
+  const { effectiveConnectionType } = useNetworkStatus(clientHintEct || ADAPTIVE_FACTORS.DEFAULT_ECT);
+  const { deviceMemory } = useMemoryStatus({deviceMemory: clientHintDeviceMemory || ADAPTIVE_FACTORS.DEFAULT_DEVICE_MEMORY});
+  const { manualEnabled, isLiteModeOn } = useContext(EmulationContext);
   
-  const isLiteMode = checkLiteMode(effectiveConnectionType, deviceMemory);
+  let isLiteMode = checkLiteMode(effectiveConnectionType, deviceMemory);
+  if (manualEnabled) {
+    isLiteMode = isLiteModeOn;
+  }
+
   return isLiteMode;
 };
 
-export { useCheckLiteMode };
+const useLiteModeDebugging = () => {
+  const router = useRouter();
+  const [manualEnabled, setManualEnabled] = useState(router.query[QUERY_PARAMS.MODE] ? true : false);
+  const [isLiteModeOn, setIsLiteModeOn] = useState(router.query[QUERY_PARAMS.MODE] === ADAPTIVE_MODE.LITE);
+
+  const enableManualTestingHandler = isManual => {
+    setManualEnabled(isManual);
+  };
+
+  const toggleLiteModeHandler = isLite => {
+    setIsLiteModeOn(isLite);
+  };
+
+  return {
+    manualEnabled,
+    isLiteModeOn,
+    enableManualTestingHandler,
+    toggleLiteModeHandler
+  };
+};
+
+export { useCheckLiteMode, useLiteModeDebugging };

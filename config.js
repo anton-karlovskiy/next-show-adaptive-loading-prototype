@@ -38,7 +38,7 @@ const BACKDROP_SIZES = {
 
 const TMDB_IMAGES_BASE_URL ='https://image.tmdb.org/t/p/';
 
-const ADAPTIVE_LOADING = {
+const ADAPTIVE_FACTORS = {
   ECT_LIMIT: '4g',
   DEVICE_MEMORY_LIMIT: 4,
   DEFAULT_ECT: '4g',
@@ -47,7 +47,7 @@ const ADAPTIVE_LOADING = {
 
 const checkLiteMode = (ect, deviceMemory) => {
   console.log('[config checkLiteMode] ect, deviceMemory => ', ect, deviceMemory);
-  return (ect !== ADAPTIVE_LOADING.ECT_LIMIT || deviceMemory < ADAPTIVE_LOADING.DEVICE_MEMORY_LIMIT);
+  return (ect !== ADAPTIVE_FACTORS.ECT_LIMIT || deviceMemory < ADAPTIVE_FACTORS.DEVICE_MEMORY_LIMIT);
 };
 
 export {
@@ -56,7 +56,7 @@ export {
   TMDB_IMAGES_BASE_URL,
   POSTER_SIZES,
   BACKDROP_SIZES,
-  ADAPTIVE_LOADING,
+  ADAPTIVE_FACTORS,
   getTmdbAPIEndpoint,
   checkLiteMode
 };

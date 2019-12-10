@@ -40,13 +40,16 @@ const Search = ({ shows, clientHint }) => {
 Search.getInitialProps = async ({ query, req }) => {
   const searchQuery = query[QUERY_PARAMS.QUERY];
   const page = query[QUERY_PARAMS.PAGE];
-  const response = await fetch(`${TMDB_API_SEARCH_TV_SHOWS}&${serializeToQueryParam({[QUERY_PARAMS.QUERY]: searchQuery, [QUERY_PARAMS.PAGE]: page})}`);
-  const { results: shows } = await response.json();
-
   const clientHint = {
     deviceMemory: req ? req.headers['device-memory'] : null,
     ect: req ? req.headers['ect'] : null
   };
+
+  if (!searchQuery) {
+    return {shows: [], clientHint};
+  }
+  const response = await fetch(`${TMDB_API_SEARCH_TV_SHOWS}&${serializeToQueryParam({[QUERY_PARAMS.QUERY]: searchQuery, [QUERY_PARAMS.PAGE]: page})}`);
+  const { results: shows } = await response.json();
   
   return {shows, clientHint};
 };

@@ -1,25 +1,36 @@
 
-import App from 'next/app';
-
 import Head from '../components/Head';
 import Layout from '../hoc/Layout';
+import { EmulationContext } from '../contexts';
+import { useLiteModeDebugging } from '../utils/hooks';
 
-class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props;
+const MyApp = ({ Component, pageProps }) => {
+  const {
+    manualEnabled,
+    isLiteModeOn,
+    enableManualTestingHandler,
+    toggleLiteModeHandler
+  } = useLiteModeDebugging();
 
-    return (
-      <>
-        <Head>
-          <meta httpEquiv='Accept-CH' content='DPR, Width, Viewport-Width, ECT, Device-Memory' />
-          <meta httpEquiv='Accept-CH-Lifetime' content='86400' />
-        </Head>
+  return (
+    <>
+      <Head>
+        <meta httpEquiv='Accept-CH' content='DPR, Width, Viewport-Width, ECT, Device-Memory' />
+        <meta httpEquiv='Accept-CH-Lifetime' content='86400' />
+      </Head>
+      <EmulationContext.Provider
+        value={{
+          manualEnabled,
+          isLiteModeOn,
+          enableManualTestingHandler,
+          toggleLiteModeHandler
+        }}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </>
-    );
-  }
-}
+      </EmulationContext.Provider>
+    </>
+  );
+};
 
 export default MyApp;

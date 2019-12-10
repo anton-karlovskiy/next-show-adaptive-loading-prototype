@@ -20,7 +20,7 @@ const ThumbnailGridItem = ({ id, thumbnail }) => {
         lazySizes.init(); // lazySizes works off a global.
       }
     })();
-  }, []);
+  }, [thumbnail]);
 
   return (
     <>

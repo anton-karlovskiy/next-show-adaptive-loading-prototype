@@ -25,7 +25,7 @@ const Home = ({ shows, clientHint }) => {
     id: show.id,
     thumbnail: show.poster_path ? `${TMDB_IMAGES_BASE_URL}${posterSize}${show.poster_path}` : null
   }));
-  
+
   return (
     <>
       <SearchForm shows={shows} />

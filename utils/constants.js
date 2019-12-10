@@ -2,7 +2,8 @@
 const QUERY_PARAMS = {
   PAGE: 'page',
   QUERY: 'query',
-  ID: 'id'
+  ID: 'id',
+  MODE: 'mode'
 };
 
 const PAGES = {
@@ -11,7 +12,13 @@ const PAGES = {
   SEARCH: '/search'
 };
 
+const ADAPTIVE_MODE = {
+  LITE: 'lite',
+  FULL: 'full'
+};
+
 export {
   QUERY_PARAMS,
-  PAGES
+  PAGES,
+  ADAPTIVE_MODE
 };
