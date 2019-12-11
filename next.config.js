@@ -31,9 +31,7 @@ module.exports = withTM(withCSS({
     })
     return config
   },
-  // ray test touch <
   target: 'serverless',
   // distDir: './build',
-  // ray test touch >
   transpileModules: ['react-adaptive-hooks']
 }));
