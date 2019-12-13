@@ -18,7 +18,7 @@ import { useContext, useEffect, useState } from 'react';
 
 import CheckboxWithLabel from './CheckboxWithLabel';
 import ToggleWithLabel from './ToggleWithLabel';
-import { EmulationContext } from '../../contexts';
+import { AppContext } from '../../contexts';
 import { checkIsSmallViewport } from '../../utils/helpers';
 
 const LiteModeDebugging = () => {
@@ -32,7 +32,7 @@ const LiteModeDebugging = () => {
     isLiteModeOn,
     toggleLiteModeHandler,
     enableManualTestingHandler
-  } = useContext(EmulationContext);
+  } = useContext(AppContext);
 
   return (
     <>
@@ -48,8 +48,6 @@ const LiteModeDebugging = () => {
           onChange={enableManualTestingHandler} />
       </div>
       <style jsx>{`
-        position: absolute;
-        top: 0;
         display: flex;
       `}</style>
     </>

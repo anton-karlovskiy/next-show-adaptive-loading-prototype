@@ -15,28 +15,34 @@
  */
 
 import { useContext } from 'react';
+import { useRouter } from 'next/router'
 
-import { AppContext } from '../../contexts';
+import { AppContext } from '../../../contexts';
 
-const CircleNumber = ({ number }) => {
+const BackLink = () => {
   const { theme } = useContext(AppContext);
+  const router = useRouter();
+  const backHandler = event => {
+    event.preventDefault();
+    router.back();
+  };
 
   return (
     <>
-      <span>{number}</span>
+      <a href='#' onClick={backHandler}>
+        <h3>Back</h3>
+      </a>
       <style jsx>{`
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        padding: 5px;
-        margin-right: 10px;
-        border-radius: 50%;
-        color: ${theme.palette.text.secondary};
-        background-color: ${theme.palette.background.paper};
-        text-align: center;
+        a {
+          color: ${theme.palette.text.primary};
+          text-decoration: none;
+        }
+        h3 {
+          margin: 12px 0;
+        }
       `}</style>
     </>
   );
 };
 
-export default CircleNumber;
+export default BackLink;

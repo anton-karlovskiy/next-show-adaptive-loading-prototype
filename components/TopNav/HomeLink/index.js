@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-import TopNav from '../../components/TopNav';
-import globalStyles from '../../styles/global.js';
+import Link from 'next/link';
 
-const Layout = ({ children }) => (
+import { PAGES } from '../../../utils/constants';
+
+const HomeLink = () => (
   <>
-    <div>
-      <TopNav />
-      {children}
-    </div>
-    <style jsx global>
-      {globalStyles}
-    </style>
+    <Link href={PAGES.HOME} replace>
+      <a>
+        <h3 className='link'>Home</h3>
+      </a>
+    </Link>
   </>
 );
 
-export default Layout;
+export default HomeLink;
