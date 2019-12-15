@@ -14,24 +14,25 @@
  * limitations under the License.
  */
 
+import Link from 'next/link';
+
 import ContainedButton from '../ContainedButton';
 
-const CreditSource = () => (
-  <>
-    <a
-      className='github-link'
-      href='https://github.com/GoogleChromeLabs/adaptive-loading/tree/master/next-show-adaptive-loading/'>
-      <ContainedButton>
-        Github.com
-      </ContainedButton>
-    </a>
-    <style jsx>{`
-      .github-link {
-        display: block;
-        margin-top: 48px;
-      }
-    `}</style>
-  </>
+const Pagination = ({ url, page }) => (
+  <div>
+    { page > 1 && (
+      <Link href={`${url}${page - 1}`}>
+        <a>
+          <ContainedButton style={{marginRight: '12px'}}>Previous</ContainedButton>
+        </a>
+      </Link>
+    ) }
+    <Link href={`${url}${(page || 1) + 1}`}>
+      <a>
+        <ContainedButton>Next</ContainedButton>
+      </a>
+    </Link>
+  </div>
 );
 
-export default CreditSource;
+export default Pagination;
