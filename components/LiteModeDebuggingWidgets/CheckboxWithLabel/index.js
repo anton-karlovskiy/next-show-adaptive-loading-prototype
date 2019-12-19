@@ -14,35 +14,26 @@
  * limitations under the License.
  */
 
-import { useContext } from 'react';
-import { useRouter } from 'next/router';
-
-import { AppContext } from '../../../contexts';
-
-const BackLink = () => {
-  const { theme } = useContext(AppContext);
-  const router = useRouter();
-  const backHandler = event => {
-    event.preventDefault();
-    router.back();
+const CheckboxWithLabel = ({ label, onChange, ...rest }) => {
+  const onChangeHandler = event => {
+    onChange(event.target.checked);
   };
 
   return (
     <>
-      <a href='#' onClick={backHandler}>
-        <h3 className='link'>Back</h3>
-      </a>
+      <div className='checkbox'>
+        <input type='checkbox' onChange={onChangeHandler} {...rest} />
+        <label>{label}</label>
+      </div>
       <style jsx>{`
-        a {
-          color: ${theme.palette.text.primary};
-          text-decoration: none;
-        }
-        h3 {
-          margin: 12px 0;
+        .checkbox {
+          display: flex;
+          align-items: center;
+          padding: 8px;
         }
       `}</style>
     </>
   );
 };
 
-export default BackLink;
+export default CheckboxWithLabel;

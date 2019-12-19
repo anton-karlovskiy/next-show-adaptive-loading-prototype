@@ -30,6 +30,5 @@ module.exports = withCSS({
     })
     return config
   },
-  distDir: './build',
-  transpileModules: ['react-adaptive-hooks']
+  distDir: './build'
 });

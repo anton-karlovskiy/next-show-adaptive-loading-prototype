@@ -14,35 +14,33 @@
  * limitations under the License.
  */
 
-import { useContext } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
+import Toggle from 'react-toggle'; // TODO: update -> deprecated lifecyle usage detected
+import 'react-toggle/style.css';
 
-import { AppContext } from '../../../contexts';
-
-const BackLink = () => {
-  const { theme } = useContext(AppContext);
-  const router = useRouter();
-  const backHandler = event => {
-    event.preventDefault();
-    router.back();
+const ToggleWithLabel = ({ label, onChange, ...rest }) => {
+  const onChangeHandler = event => {
+    onChange(event.target.checked);
   };
 
   return (
     <>
-      <a href='#' onClick={backHandler}>
-        <h3 className='link'>Back</h3>
-      </a>
+      <div className='toggle-with-label'>
+        <Toggle onChange={onChangeHandler} {...rest} />
+        <label>{label}</label>
+      </div>
       <style jsx>{`
-        a {
-          color: ${theme.palette.text.primary};
-          text-decoration: none;
+        .toggle-with-label {
+          display: flex;
+          align-items: center;
+          padding: 8px;
         }
-        h3 {
-          margin: 12px 0;
+        :global(.toggle-with-label > .react-toggle) {
+          margin-right: 8px;
         }
       `}</style>
     </>
   );
 };
 
-export default BackLink;
+export default ToggleWithLabel;

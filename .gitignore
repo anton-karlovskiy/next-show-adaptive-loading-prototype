@@ -29,4 +29,3 @@ yarn-error.log*
 
 # firebase
 /.firebase
-/.firebase/

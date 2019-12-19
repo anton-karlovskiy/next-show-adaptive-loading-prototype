@@ -14,35 +14,37 @@
  * limitations under the License.
  */
 
-import { useContext } from 'react';
 import { useRouter } from 'next/router';
 
-import { AppContext } from '../../../contexts';
+import { ADAPTIVE_MODE } from '../../utils/constants';
+import { serializeToQueryParam } from '../../utils/helpers';
 
-const BackLink = () => {
-  const { theme } = useContext(AppContext);
+const LiteModeDebuggingLinks = () => {
   const router = useRouter();
-  const backHandler = event => {
-    event.preventDefault();
-    router.back();
-  };
 
   return (
     <>
-      <a href='#' onClick={backHandler}>
-        <h3 className='link'>Back</h3>
-      </a>
+      <div>
+        <a href={serializeToQueryParam({...router.query, mode: ADAPTIVE_MODE.LITE}, router.pathname)}>
+          Direct link to force slow mode
+        </a>
+        <a href={serializeToQueryParam({...router.query, mode: ADAPTIVE_MODE.FULL}, router.pathname)}>
+          Direct link to force normal mode
+        </a>
+      </div>
       <style jsx>{`
+        padding: 16px 24px;
+        margin: 8px 12px;
         a {
-          color: ${theme.palette.text.primary};
-          text-decoration: none;
+          font-size: 1.25rem;
+          text-decoration: underline;
         }
-        h3 {
-          margin: 12px 0;
+        a:first-child {
+          margin-right: 24px;
         }
       `}</style>
     </>
   );
 };
 
-export default BackLink;
+export default LiteModeDebuggingLinks;
